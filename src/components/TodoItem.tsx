@@ -68,7 +68,7 @@ const TodoItem = ({ todoName, finishOrNot, date, Delete, change, changeFinishOrN
    }
 
    return (
-      <div className={`render p-3 mb-4 rounded ${isFinished ? 'bg-teal-200' : 'bg-teal-300'} flex justify-center items-center`}>
+      <div className={`render p-2 mb-4 rounded ${isFinished ? 'bg-lime-200' : 'bg-lime-400'} flex justify-center items-center`}>
          <div className='container flex justify-start items-center basis-11/12'>
             {!isChanged &&
                <div className="m-4 flex justify-start items-center">
@@ -83,11 +83,11 @@ const TodoItem = ({ todoName, finishOrNot, date, Delete, change, changeFinishOrN
 
             {!isChanged &&
                <div onDoubleClick={doubleClickHandler} className="container flex flex-col justify-center items-start">
-                  <div className={`text-black text-3xl font-mono flex justify-start items-center text-start mb-2 ${isFinished ? 'line-through' : ''}`}>
+                  <div className={`text-black text-2xl font-mono flex justify-start items-center text-start mb-2 ${isFinished ? 'line-through' : ''}`}>
                      {todoName}
                   </div>
 
-                  <div className={`text-slate-800 text-sm flex justify-start items-center text-start ${isFinished ? 'line-through' : ''}`} style={{ color: 'rgb(100, 100, 100)', flex: 1 }}>
+                  <div className={`text-neutral-800 text-sm flex justify-start items-center text-start ${isFinished ? 'line-through' : ''}`} style={{ color: 'rgb(100, 100, 100)', flex: 1 }}>
                      {date}
                   </div>
                </div>

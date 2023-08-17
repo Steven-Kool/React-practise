@@ -25,7 +25,6 @@ const Todo = ({ description }: { description: string }) => {
    const [finishedTodo, setFinishedTodo] = useState<Todos[]>([]);
    const [todoNumber, setTodoNumber] = useState(todoList.length);
    const [finishedNumber, setFinishedNumber] = useState(finishedTodo.length);
-   const [todoToCount, setTodoToCount] = useState<Todos[]>(todoList.filter((todo) => todo.statement === false));
 
    const animationDelay: number = 300;
 
@@ -59,13 +58,12 @@ const Todo = ({ description }: { description: string }) => {
    }, [filter, todoList]);
 
    useEffect(() => {
-      setTodoNumber(todoToCount.length);
+      setTodoNumber(todoList.length);
       setFinishedNumber(finishedTodo.length);
-   }, [todoToCount, finishedTodo]);
+   }, [todoList, finishedTodo]);
 
    useEffect(() => {
       setFinishedTodo(todoList.filter((todo) => todo.statement === true));
-      setTodoToCount(todoList.filter((todo) => todo.statement === false));
    });
 
    const changeFinishOrNot = (id: number, finishOrNot: boolean) => {
@@ -154,7 +152,7 @@ const Todo = ({ description }: { description: string }) => {
             <div className='max-w-2/3 min-w-2/3 rounded-lg p-4 flex flex-col justify-center items-stretch bg-slate-200'>
                <div className='container w-full h-10 flex flex-row justify-around font-sans items-center'>
                   <div className='text-slate-700 text-base font-semibold'>
-                     Todolist Number: {todoNumber}
+                     Total Todo: {todoNumber}
                   </div>
 
                   <div className='text-slate-700 text-base font-semibold'>
