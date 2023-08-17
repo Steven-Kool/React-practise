@@ -9,10 +9,9 @@ interface Props {
    Delete: () => void;
    change: (newChange: string) => boolean;
    changeFinishOrNot: (situation: boolean) => void;
-   changeArray: () => void;
 }
 
-const TodoItem = ({ todoName, finishOrNot, date, Delete, change, changeFinishOrNot, changeArray }: Props) => {
+const TodoItem = ({ todoName, finishOrNot, date, Delete, change, changeFinishOrNot }: Props) => {
    const [isFinished, setFinishOrNot] = useState(finishOrNot);
    const [isChanged, setIsChanged] = useState(false);
    const [existingName, setExistingName] = useState(todoName);
@@ -29,6 +28,8 @@ const TodoItem = ({ todoName, finishOrNot, date, Delete, change, changeFinishOrN
    const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFinishOrNot(e.target.checked);
       changeFinishOrNot(e.target.checked);
+
+
    };
 
    const changeName = async () => {

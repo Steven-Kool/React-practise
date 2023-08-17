@@ -25,6 +25,7 @@ const Todo = ({ description }: { description: string }) => {
    const [finishedTodo, setFinishedTodo] = useState<Todos[]>([]);
    const [todoNumber, setTodoNumber] = useState(todoList.length);
    const [finishedNumber, setFinishedNumber] = useState(finishedTodo.length);
+   const [todoToCount, setTodoToCount] = useState<Todos[]>(todoList.filter((todo) => todo.statement === false));
 
    const animationDelay: number = 300;
 
@@ -58,16 +59,27 @@ const Todo = ({ description }: { description: string }) => {
    }, [filter, todoList]);
 
    useEffect(() => {
-      setTodoNumber(todoList.length);
+      setTodoNumber(todoToCount.length);
       setFinishedNumber(finishedTodo.length);
-   }, [todoList, finishedTodo]);
+   }, [todoToCount, finishedTodo]);
+
+   useEffect(() => {
+      setFinishedTodo(todoList.filter((todo) => todo.statement === true));
+      setTodoToCount(todoList.filter((todo) => todo.statement === false));
+   });
 
    const changeFinishOrNot = (id: number, finishOrNot: boolean) => {
-      setTodoList((prevTodoList) =>
-         prevTodoList.map((todo) =>
-            todo.id === id ? { ...todo, statement: finishOrNot } : todo
-         )
-      );
+      const changedTodo = todoList.find((todo) => id === todo.id);
+
+      if (changedTodo) {
+         setTodoList((prevTodoList) =>
+            prevTodoList.map((todo) =>
+               todo.id === id ? { ...todo, statement: finishOrNot } : todo
+            )
+         );
+
+         setFinishedTodo((prevTodo) => [...prevTodo, changedTodo]);
+      }
    };
 
    const addNewTodo = () => {
@@ -116,19 +128,6 @@ const Todo = ({ description }: { description: string }) => {
       addAlert({ type: 'warning' });
    };
 
-   const changeArray = (id: number) => {
-      const toMoveTodo = todoList.find((todo) => todo.id === id)
-
-      if (toMoveTodo && toMoveTodo.statement === false) {
-         setTodoList(prevTodo => prevTodo.filter((todo) => todo.id !== id));
-         setFinishedTodo((prevTodo) => [...prevTodo, toMoveTodo]);
-
-      } else if (toMoveTodo && toMoveTodo.statement === true) {
-         setFinishedTodo((prevTodo) => prevTodo.filter((todo) => todo.id !== id));
-         setTodoList((prevTodo) => [...prevTodo, toMoveTodo]);
-      };
-   };
-
    const changeTodoName = (id: number, newName: string): boolean => {
       if (newName.trim() !== '') {
          setTodoList((prevTodoList) =>
@@ -153,12 +152,12 @@ const Todo = ({ description }: { description: string }) => {
       <ListPage title={description}>
          <div className='w-full flex justify-center items-center m-0'>
             <div className='max-w-2/3 min-w-2/3 rounded-lg p-4 flex flex-col justify-center items-stretch bg-slate-200'>
-               <div className='container w-full h-10 flex flex-row justify-around items-center'>
-                  <div className='text-slate-700 text-sm'>
+               <div className='container w-full h-10 flex flex-row justify-around font-sans items-center'>
+                  <div className='text-slate-700 text-base font-semibold'>
                      Todolist Number: {todoNumber}
                   </div>
 
-                  <div className='text-slate-700 text-sm'>
+                  <div className='text-slate-700 text-base font-semibold'>
                      Finished Tasks: {finishedNumber}
                   </div>
                </div>
@@ -193,7 +192,6 @@ const Todo = ({ description }: { description: string }) => {
                         Delete={() => handleDeleteTodo(todo.id)}
                         change={(newName: string) => changeTodoName(todo.id, newName)}
                         changeFinishOrNot={(situation: boolean) => changeFinishOrNot(todo.id, situation)}
-                        changeArray={() => changeArray(todo.id)}
                      />
                   )) : (
                      filteredArray.map((todo) => (
@@ -205,7 +203,6 @@ const Todo = ({ description }: { description: string }) => {
                            Delete={() => handleDeleteTodo(todo.id)}
                            change={(newName: string) => changeTodoName(todo.id, newName)}
                            changeFinishOrNot={(situation: boolean) => changeFinishOrNot(todo.id, situation)}
-                           changeArray={() => changeArray(todo.id)}
                         />
                      ))
                   )) : (
