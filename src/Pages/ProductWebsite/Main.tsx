@@ -1,5 +1,6 @@
 import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
+import Slide from "../../components/Slides";
 
 const ProductWebsite = () => {
    const [scrollY, setScrollY] = useState(0);
@@ -19,9 +20,10 @@ const ProductWebsite = () => {
    }, []);
 
    useEffect(() => {
-      fetch('https://world.openfoodfacts.org?page_size=10&json=true')
+      fetch('https://world.openfoodfacts.org?page_size=5&json=true')
          .then(response => response.json())
          .then(data => {
+            console.log(data.products);
             setSlides(data.products);
             setSlideLoading(false);
          })
@@ -33,7 +35,17 @@ const ProductWebsite = () => {
 
    return (
       <div className="w-full m-0 p-0" style={{height: '2000px'}}>
-         <Navbar scroll={scrollY}/>
+         <Navbar scroll={scrollY} />
+
+         <div className="w-full h-auto mt-0 p-0">
+            {slides.map((slide, index) => (
+               <Slide
+                  key={index}
+                  imgUrl={slide.image_url}
+                  productName={slide.product_name}
+               />
+            ))}
+         </div>
       </div>
    );
 };
