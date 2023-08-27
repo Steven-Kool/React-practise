@@ -2,9 +2,16 @@ import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import Slide from "../../components/Slides";
 
+interface SlideData {
+   title: string;
+   price: number;
+   description: string;
+   category: string;
+}
+
 const ProductWebsite = () => {
    const [scrollY, setScrollY] = useState(0);
-   const [slides, setSlides] = useState([]);
+   const [slides, setSlides] = useState<SlideData[]>([]);
    const [slideLoading, setSlideLoading] = useState(true);
 
    useEffect(() => {
@@ -20,16 +27,22 @@ const ProductWebsite = () => {
    }, []);
 
    useEffect(() => {
-      fetch('https://world.openfoodfacts.org?page_size=5&json=true')
+      if (slides) {
+         setSlideLoading(false);
+      } else {
+         setSlideLoading(true);
+      }
+   }, [slides]);
+
+   useEffect(() => {
+      fetch('https://jsonplaceholder.typicode.com/todos')
          .then(response => response.json())
          .then(data => {
-            console.log(data.products);
-            setSlides(data.products);
-            setSlideLoading(false);
+            console.log(data);
+            setSlides(data);
          })
          .catch(error => {
             console.error(error);
-            setSlideLoading(false);
          });
    }, []);
 
@@ -37,15 +50,19 @@ const ProductWebsite = () => {
       <div className="w-full m-0 p-0" style={{height: '2000px'}}>
          <Navbar scroll={scrollY} />
 
-         <div className="w-full h-auto mt-0 p-0">
+         {!slideLoading ? (
+            <div className="w-full h-auto mt-0 p-0">
             {slides.map((slide, index) => (
                <Slide
                   key={index}
-                  imgUrl={slide.image_url}
-                  productName={slide.product_name}
+                  imgUrl={slide.category}
+                  productName={slide.title}
                />
             ))}
          </div>
+         ) : (
+            <div>Loading...</div>
+         )}
       </div>
    );
 };

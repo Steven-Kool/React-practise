@@ -1,6 +1,6 @@
 interface Props {
-   imgUrl: string;
-   productName: string;
+   imgUrl?: string;
+   productName?: string;
 }
 
 const Slide = ({ imgUrl, productName }: Props) => {
