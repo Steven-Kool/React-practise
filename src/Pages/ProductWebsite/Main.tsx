@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import Slide from "../../components/Slides";
 
 interface SlideData {
-   title: string;
-   price: number;
-   description: string;
    category: string;
+   description: string;
+   image: string;
+   price: number;
+   title: string;
 }
 
 const ProductWebsite = () => {
@@ -35,7 +36,7 @@ const ProductWebsite = () => {
    }, [slides]);
 
    useEffect(() => {
-      fetch('https://jsonplaceholder.typicode.com/todos')
+      fetch('https://fakestoreapi.com/products')
          .then(response => response.json())
          .then(data => {
             console.log(data);
@@ -55,7 +56,7 @@ const ProductWebsite = () => {
             {slides.map((slide, index) => (
                <Slide
                   key={index}
-                  imgUrl={slide.category}
+                  imgUrl={slide.image}
                   productName={slide.title}
                />
             ))}
