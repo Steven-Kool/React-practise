@@ -36,7 +36,7 @@ const ProductWebsite = () => {
    }, [slides]);
 
    useEffect(() => {
-      fetch('https://fakestoreapi.com/products')
+      fetch('https://fakestoreapi.com/products?limit=5')
          .then(response => response.json())
          .then(data => {
             console.log(data);
@@ -48,19 +48,21 @@ const ProductWebsite = () => {
    }, []);
 
    return (
-      <div className="w-full m-0 p-0" style={{height: '500px'}}>
+      <div className="w-full m-0 p-0" style={{height: '200px'}}>
          <Navbar scroll={scrollY} />
 
          {!slideLoading ? (
             <div className="w-full h-auto mt-0 p-0">
-            {slides.map((slide, index) => (
-               <Slide
-                  key={index}
-                  imgUrl={slide.image}
-                  productName={slide.title}
-               />
-            ))}
-         </div>
+               <div className="w-full flex flex-row m-0 p-0">
+                  {slides.map((slide, index) => (
+                     <Slide
+                        key={index}
+                        imgUrl={slide.image}
+                        productName={"Hi"}
+                     />
+                  ))}
+               </div>
+            </div>
          ) : (
             <div>Loading...</div>
          )}
