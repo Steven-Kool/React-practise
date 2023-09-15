@@ -48,7 +48,7 @@ const ProductWebsite = () => {
    }, []);
 
    return (
-      <div className="w-full m-0 p-0" style={{height: '2000px'}}>
+      <div className="w-full m-0 p-0" style={{height: '500px'}}>
          <Navbar scroll={scrollY} />
 
          {!slideLoading ? (
