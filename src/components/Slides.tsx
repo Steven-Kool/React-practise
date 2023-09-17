@@ -5,10 +5,13 @@ interface Props {
 
 const Slide = ({ imgUrl, productName }: Props) => {
    return (
-      <div className="w-full h-auto relative">
-         <img className="w-fit h-auto" src={imgUrl}></img>
-         <div className="absolute text-3xl text-black">
+      <div className="slide">
+         <div className="image-info-holder">
             {productName}
+         </div>
+         
+         <div className="img-holder">
+            <img src={imgUrl} />
          </div>
       </div>
    )

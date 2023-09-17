@@ -1,3 +1,4 @@
+import '/src/styles/productwebsite.css';
 import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import Slide from "../../components/Slides";
@@ -48,12 +49,12 @@ const ProductWebsite = () => {
    }, []);
 
    return (
-      <div className="w-full m-0 p-0" style={{height: '200px'}}>
+      <div className="main-holder">
          <Navbar scroll={scrollY} />
 
-         {!slideLoading ? (
-            <div className="w-full h-auto mt-0 p-0">
-               <div className="w-full flex flex-row m-0 p-0">
+         <div className="slide-holder">
+            <div className="slide-container">
+               <div className='slide-flexing'>
                   {slides.map((slide, index) => (
                      <Slide
                         key={index}
@@ -63,9 +64,7 @@ const ProductWebsite = () => {
                   ))}
                </div>
             </div>
-         ) : (
-            <div>Loading...</div>
-         )}
+         </div>
       </div>
    );
 };

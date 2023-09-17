@@ -24,7 +24,7 @@ const Navbar = ({ scroll }: { scroll: number }) => {
    };
 
    return (
-      <div className={`w-screen transition duration-300 ease-in-out fixed h-20 top-0 pr-7 flex flex-row justify-between items-center z-10`} style={scroll < 40 ? {backgroundColor: 'rgba(32, 32, 32, 0)'} : {backgroundColor: 'rgba(32, 32, 32, 0.5)'}}>
+      <div className={`w-screen transition duration-300 ease-in-out fixed h-20 top-0 pr-7 flex flex-row justify-between items-center z-10`} style={scroll < 30 ? {backgroundColor: 'rgba(32, 32, 32, 0)'} : {backgroundColor: 'rgba(32, 32, 32, 0.5)'}}>
          <div className="flex-1 flex flex-row justify-around items-center">
             <div className="basis-1/3 flex justify-center items-center text-emerald-500 text-4xl font-sans text-extrabold">
                Foodee
