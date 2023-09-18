@@ -12,6 +12,7 @@ const Slide = ({ imgUrl, productName }: Props) => {
          
          <div className="img-holder">
             <img src={imgUrl} />
+            <div className="image-cover"></div>
          </div>
       </div>
    )

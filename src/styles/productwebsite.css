@@ -41,13 +41,23 @@
 }
 
 .slide .img-holder {
+   position: relative;
    width: 60%;
    height: 100%;
    display: flex;
    justify-content: center;
+   z-index: 2;
 }
 
 .slide .img-holder img {
    width: auto;
    height: inherit;
+}
+
+.image-cover {
+   position: absolute;
+   width: inherit;
+   height: inherit;
+   background: linear-gradient(to right, rgba(32, 32, 32, 0.8), rgba(32, 32, 32, 0.1), rgba(32, 32, 32, 0.8));
+   z-index: 3;
 }
