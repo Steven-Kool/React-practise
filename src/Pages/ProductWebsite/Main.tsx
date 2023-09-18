@@ -7,7 +7,6 @@ interface SlideData {
    category: string;
    description: string;
    image: string;
-   price: number;
    title: string;
 }
 
@@ -59,7 +58,10 @@ const ProductWebsite = () => {
                      <Slide
                         key={index}
                         imgUrl={slide.image}
-                        productName={"Hi"}
+                        category={slide.category}
+                        productName={slide.title}
+                        description={slide.description}
+                        loading={slideLoading}
                      />
                   ))}
                </div>
