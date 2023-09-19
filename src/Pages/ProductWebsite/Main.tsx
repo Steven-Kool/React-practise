@@ -1,4 +1,3 @@
-import '/src/styles/productwebsite.css';
 import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import Slide from "../../components/Slides";
@@ -13,7 +12,7 @@ interface SlideData {
 const ProductWebsite = () => {
    const [scrollY, setScrollY] = useState(0);
    const [slides, setSlides] = useState<SlideData[]>([]);
-   const [slideLoading, setSlideLoading] = useState(true);
+   const [loading, setSlideLoading] = useState(true);
 
    useEffect(() => {
       const handleScroll = () => {
@@ -43,28 +42,35 @@ const ProductWebsite = () => {
             setSlides(data);
          })
          .catch(error => {
-            console.error(error);
+            console.error('This is ' + error);
          });
    }, []);
 
    return (
-      <div className="main-holder">
+      <div className="m-0" style={{padding: '100px 0 0 50px', backgroundColor: 'rgb(36, 36, 40)'}}>
          <Navbar scroll={scrollY} />
 
-         <div className="slide-holder">
-            <div className="slide-container">
-               <div className='slide-flexing'>
-                  {slides.map((slide, index) => (
-                     <Slide
-                        key={index}
-                        imgUrl={slide.image}
-                        category={slide.category}
-                        productName={slide.title}
-                        description={slide.description}
-                        loading={slideLoading}
-                     />
-                  ))}
-               </div>
+         <div className="w-full h-auto m-0 p-2.5 flex justify-center">
+            <div className="m-0 p-0 border-0 rounded-2xl overflow-hidden" style={{width: '80%', height: '500px'}}>
+               {!loading ? (
+                  <div className="w-full h-full flex justify-center items-center" style={{ backgroundColor: 'rgb(80, 80, 80)' }}>
+                     <div>
+                        <img src="/src/public/22.gif" className='w-full h-full z-10'/>
+                     </div>
+                  </div>
+               ) : (
+                  <div className='h-full flex flex-row' style={{width: '500%'}}>
+                     {slides.map((slide, index) => (
+                        <Slide
+                           key={index}
+                           imgUrl={slide.image}
+                           category={slide.category}
+                           productName={slide.title}
+                           description={slide.description}
+                        />
+                     ))} 
+                  </div>
+               )}
             </div>
          </div>
       </div>

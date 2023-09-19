@@ -5,35 +5,26 @@ interface Props {
    category?: string;
    productName?: string;
    description?: string;
-   loading: boolean;
 }
 
-const Slide = ({ imgUrl, category, productName, description, loading }: Props) => {
+const Slide = ({ imgUrl, category, productName, description }: Props) => {
    return (
-      <div className={`relative w-full h-full flex ${!loading ? 'justify-end' : 'justify-center'} items-center`} style={{backgroundColor: 'rgb(50, 50, 40)'}}>
-         {!loading ? (
-            <>
-               <div className="image-info-holder">
-                  <div className="category-holder"># {category}</div>
-                  <div className="productname-holder">{productName}</div>
-                  <div className="description-holder">{description}</div>
-                  <div className="button-holder">
-                  <Link to={`/product-website/${productName}`} className="text-decoration-none">
-                     <button className="w-12 h-10 border-none rounded-lg background-white"></button>
-                  </Link>
-                  </div>
-               </div>
-               
-               <div className="img-holder">
-                  <img src={imgUrl} />
-                  <div className="image-cover"></div>
-               </div>
-            </>
-         ) : (
-            <div>
-               <img src='/src/public/22.gif' />
+      <div className='relative w-full h-full flex justify-end items-center' style={{backgroundColor: 'rgb(50, 50, 40)'}}>
+         <div className="absolute ml-0 h-full w-1/2 bg-transparent text-slate-200 flex flex-col justify-end items-start z-20" style={{padding: '10px 0 40px 30px'}}>
+            <div className="text-2xl font-medium mb-2.5" style={{fontFamily: 'Inconsolata, monospace', color:' rgb(238, 165, 30)'}}># {category}</div>
+            <div className="text-4xl font-semibold mb-8" style={{fontFamily: 'Poppins, sans-serif'}}>{productName}</div>
+            <div className="text-xl font-medium mb-5" style={{fontFamily: 'Arial, Helvetica, sans-serif', color: 'rgb(255, 94, 120)'}}>{description}</div>
+            <div className="button-holder">
+            <Link to={`/product-website/${productName}`} className="text-decoration-none">
+               <button className="w-12 h-10 border-0 rounded-lg bg-white"></button>
+            </Link>
             </div>
-         )}
+         </div>
+         
+         <div className="relative w-3/5 h-full text-white flex justify-center">
+            <img src={imgUrl} className="w-auto h-full" />
+            <div className="absolute w-full h-full z-10" style={{background: "linear-gradient(to right, rgba(50, 50, 40, 1), rgba(50, 50, 40, 0.1), rgba(50, 50, 40, 0.1))"}}></div>
+         </div>
       </div>
    )
 };
