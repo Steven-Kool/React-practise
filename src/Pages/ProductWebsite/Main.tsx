@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import Slide from "../../components/Slides";
 
 interface SlideData {
-   category: {2: string}
+   category: string;
    description: string;
-   images: {0: string};
-   price: number;
+   image: string;
    title: string;
 }
 
@@ -38,7 +37,7 @@ const ProductWebsite = () => {
    }, [slides]);
 
    useEffect(() => {
-      fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=5')
+      fetch('https://fakestoreapi.com/products?limit=5')
          .then(response => response.json())
          .then(data => {
             console.log(data);
@@ -82,8 +81,8 @@ const ProductWebsite = () => {
                      {slides.map((slide, index) => (
                         <Slide
                            key={index}
-                           imgUrl={slide.images[0]}
-                           category={slide.category[2]}
+                           imgUrl={slide.image}
+                           category={slide.category}
                            productName={slide.title}
                            description={slide.description}
                            clickOrNot={clickOrNot}
