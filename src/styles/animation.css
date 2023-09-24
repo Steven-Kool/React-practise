@@ -58,3 +58,15 @@
 .unrender {
    animation: unrender 0.3s forwards;
 }
+
+@keyframes slideRender {
+   0% {
+      right: -100%;
+   }
+   100% {
+      left: 0px;
+   }
+}
+.slide-animation {
+   animation: slideRender 0.3s forwards;
+}

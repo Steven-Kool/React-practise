@@ -10,15 +10,15 @@ interface Props {
 
 const Slide = ({ imgUrl, category, productName, description, clickOrNot }: Props) => {
    return (
-      <div className='relative w-full h-full flex flex-row justify-end items-center' style={{backgroundColor: 'rgb(50, 50, 40)'}} onClick={clickOrNot}>
+      <div className='slide-animation relative absolute w-full h-full flex flex-row justify-end items-center' style={{backgroundColor: 'rgb(50, 50, 40)'}} onClick={clickOrNot}>
          <div className="absolute left-0 h-full w-1/2 bg-transparent text-slate-200 flex flex-col justify-end items-start z-20" style={{padding: '10px 0 40px 30px'}}>
             <div className="text-2xl font-medium mb-2.5" style={{fontFamily: 'Inconsolata, monospace', color:' rgb(238, 165, 30)'}}># {category}</div>
-            <div className="text-4xl font-semibold mb-8 text-ellipsis overflow-hidden max-h-8 max-w-full" style={{fontFamily: 'Poppins, sans-serif', display: "-webkit-box", -webkit-line-clamp: "2", -webkit-box-orient: "vertical"}}>{productName}</div>
-            <div className="text-xl font-medium mb-5 text-ellipsis overflow-hidden max-h-10 max-w-full" style={{fontFamily: 'Arial, Helvetica, sans-serif', color: 'rgb(255, 94, 120)'}}>{description}</div>
+            <div className="word-wraper word-wraper-n text-4xl font-semibold mb-8 text-ellipsis overflow-hidden max-w-full" style={{fontFamily: 'Poppins, sans-serif'}}>{productName}</div>
+            <div className="word-wraper word-wraper-h text-xl font-medium mb-5 text-ellipsis overflow-hidden max-w-full" style={{fontFamily: 'Arial, Helvetica, sans-serif', color: 'rgb(255, 94, 120)'}}>{description}</div>
             <div className="button-holder">
-            <Link to={`/product-website/${productName}`} className="text-decoration-none">
-               <button className="w-12 h-10 border-0 rounded-lg bg-white"></button>
-            </Link>
+               <Link to={`/product-website/${productName}`} className="text-decoration-none">
+                  <button className="w-12 h-10 border-0 rounded-lg bg-white"></button>
+               </Link>
             </div>
          </div>
          

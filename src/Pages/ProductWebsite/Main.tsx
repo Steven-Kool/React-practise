@@ -29,10 +29,8 @@ const ProductWebsite = () => {
    }, []);
 
    useEffect(() => {
-      if (slides) {
+      if (slides.length > 0) {
          setSlideLoading(false);
-      } else {
-         setSlideLoading(true);
       }
    }, [slides]);
 
@@ -54,7 +52,7 @@ const ProductWebsite = () => {
 
    useEffect(() => {
       const intervalId = setInterval(() => {
-         if (!isClicked) {
+         if (!isClicked && slides) {
             setLeftMargin(prevMargin => (prevMargin - 100 >= -400) ? prevMargin - 100 : 0)
          }
       }, 5000);
@@ -69,7 +67,7 @@ const ProductWebsite = () => {
          <Navbar scroll={scrollY} />
 
          <div className="w-full h-auto m-0 p-2.5 flex justify-center">
-            <div className="m-0 p-0 border-0 rounded-2xl overflow-hidden" style={{width: '80%', height: '500px'}}>
+            <div className="relative m-0 p-0 border-0 rounded-2xl overflow-hidden" style={{width: '80%', height: '500px'}}>
                {loading ? (
                   <div className="w-full h-full flex justify-center items-center" style={{ backgroundColor: 'rgb(80, 80, 80)' }}>
                      <div>
@@ -77,7 +75,7 @@ const ProductWebsite = () => {
                      </div>
                   </div>
                ) : (
-                  <div className='h-full flex flex-row' style={{width: '500%', marginLeft: `${leftMargin}%`, transition: 'margin-left 0.3s'}}>
+                  <>
                      {slides.map((slide, index) => (
                         <Slide
                            key={index}
@@ -87,8 +85,8 @@ const ProductWebsite = () => {
                            description={slide.description}
                            clickOrNot={clickOrNot}
                         />
-                     ))} 
-                  </div>
+                     ))}
+                  </>
                )}
             </div>
          </div>
